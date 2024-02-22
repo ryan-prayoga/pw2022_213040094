@@ -1,6 +1,7 @@
 <?php
  require 'function.php';
-  $mhs = query("SELECT * FROM mahasiswa WHERE id = {$_GET['id']}");
+ $id = $_GET['id'];
+  $mhs = query("SELECT * FROM mahasiswa WHERE id = $id");
 ?>
 
 <!DOCTYPE html>

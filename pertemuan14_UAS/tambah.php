@@ -18,8 +18,10 @@ $mahasiswa = getMahasiswa();
     Tambah Nilai
   </h2>
   <form action="" method="post" class="flex flex-col gap-2" enctype="multipart/form-data">
+    <input type="hidden" name="type" value="nilai">
     <label for="mahasiswa_id" class="text-md">Pilih Mahasiswa</label>
     <select name="mahasiswa_id" id="mahasiswa_id" class="p-2 border border-gray-300 rounded-md">
+      <option value="" selected disabled>Pilih Mahasiswa</option>
       <?php foreach ($mahasiswa as $mhs) : ?>
         <option value="<?php echo $mhs['id']; ?>"><?php echo $mhs['nama']; ?></option>
       <?php endforeach; ?>

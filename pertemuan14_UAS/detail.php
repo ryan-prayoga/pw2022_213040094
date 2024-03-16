@@ -33,19 +33,19 @@ $nilai = getDetailMahasiswa($id);
 
     <label for="jurusan" class="text-md">Jurusan :</label>
     <div id="jurusan" class="font-semibold"><?= $nilai['jurusan']; ?></div>
+
+    <label for="gambar" class="text-md">Gambar :</label>
+    <img src="img/<?= $nilai['gambar']; ?>" alt="Gambar <?= $nilai['nama']; ?>" class="w-1/4">
 </body>
 
 <script>
   $(document).ready(function() {
     $('#kembali').click(function() {
-      $('#cardTiga').html(`
+      $('#cardTiga_mahasiswa').html(`
       <div class="flex flex-col items-center justify-center h-full">
           <div class="text-2xl">
             Pilih salah satu mahasiswa untuk melihat detail
           </div>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
-            Tambah Mahasiswa
-          </button>
         </div>
       `);
     });

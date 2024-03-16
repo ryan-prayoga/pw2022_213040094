@@ -23,8 +23,7 @@ if (isset($_POST['cari'])) {
       Daftar Nilai
     </h2>
     <form action="" method="post" class="flex items-center gap-2">
-      <input type="text" name="keyword" id="keyword" class="p-2 border border-gray-300 rounded-md" placeholder="Cari data..." value="<?= isset($_POST['keyword']) ? $_POST['keyword'] : ''; ?>">
-      <button type="submit" name="cari" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Cari</button>
+      <input type="text" name="keyword" id="keyword" class="p-2 border border-gray-300 rounded-md" placeholder="Cari data Nilai..." value="<?= isset($_POST['keyword']) ? $_POST['keyword'] : ''; ?>">
     </form>
   </div>
   <table border="1" cellpadding="10" cellspacing="0" class="w-full">
@@ -38,7 +37,7 @@ if (isset($_POST['cari'])) {
       </tr>
     </thead>
   </table>
-  <div class="overflow-auto h-[200px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pl-8">
+  <div class="overflow-auto h-[200px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pl-8" id="daftarNilai">
     <table border="1" cellpadding="10" cellspacing="0" class="w-full">
       <tbody>
         <?php if (empty($data)) : ?>
@@ -50,8 +49,8 @@ if (isset($_POST['cari'])) {
         <?php foreach ($data as $d) : ?>
           <tr>
             <td><?= $i; ?></td>
-            <td class="text-center text-blue-500">
-              <a href="detail.php?id=<?= $d['id']; ?>" class="detailMahasiswa" value="<?= $d['mahasiswa_id']; ?>"><?= $d['nama']; ?></a>
+            <td>
+              <?= $d['nama']; ?>
             </td>
             <td class="text-center pl-10"><?= $d['matkul']; ?></td>
             <td class="text-center pl-12"><?= $d['nilai']; ?></td>
@@ -69,23 +68,12 @@ if (isset($_POST['cari'])) {
 
 <script>
   $(document).ready(function() {
-    $('#cari').submit(function(event) {
-      event.preventDefault();
-      var formData = $(this).serialize();
-
-      $.ajax({
-        type: 'POST',
-        url: 'daftar.php',
-        data: formData,
-      }).done(function(response) {
-        $('#cardDua').load('daftar.php');
-      });
-    });
-
-    $('.detailMahasiswa').click(function(event) {
-      event.preventDefault();
-      $id = $(this).attr('value');
-      $('#cardTiga').load('detail.php?id=' + $id);
+    //  ketika keyword ditulis 
+    $('#keyword').on('keyup', function() {
+      //  ambil isi dari keyword
+      $keyword = $(this).val();
+      //  kirim data keyword ke ajax_cari.php
+      $('#daftarNilai').load('ajax/ajax_cari_nilai.php?keyword=' + $keyword);
     });
 
     $('.ubahNilai').click(function(event) {

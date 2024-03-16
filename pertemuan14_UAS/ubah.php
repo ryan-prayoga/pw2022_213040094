@@ -17,10 +17,16 @@ $nilai = getDetailNilai($id);
 </head>
 
 <body>
+  <div class="flex justify-between items-center mb-4">
   <h2 class="font-bold">
     Ubah Nilai
   </h2>
+  <span class="cursor-pointer" id="kembali">
+    x
+  </span>
+  </div>
   <form action="" method="post" class="flex flex-col gap-2" enctype="multipart/form-data">
+    <input type="hidden" name="type" value="nilai">
     <input type="hidden" name="id" id="id" value="<?php echo $nilai['id']; ?>">
     <label for="mahasiswa_id" class="text-md">Pilih Mahasiswa</label>
     <select name="mahasiswa_id" id="mahasiswa_id" class="p-2 border border-gray-300 rounded-md">
@@ -40,3 +46,17 @@ $nilai = getDetailNilai($id);
 </body>
 
 </html>
+
+<script>
+  $(document).ready(function() {
+    $('#kembali').click(function() {
+      $('#cardTiga').html(`
+      <div class="flex flex-col items-center justify-center h-full">
+          <div class="text-2xl">
+          Klik tombol "Ubah" pada daftar nilai untuk mengubah data
+          </div>
+        </div>
+      `);
+    });
+  });
+</script>

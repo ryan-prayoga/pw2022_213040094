@@ -54,10 +54,10 @@ function upload()
   $tmp_name = $_FILES['gambar']['tmp_name'];
 
   if ($error === 4) {
-    echo "<script>
-            alert('pilih gambar terlebih dahulu!');
-          </script>";
-    return false;
+    // echo "<script>
+    //         alert('pilih gambar terlebih dahulu!');
+    //       </script>";
+    return 'default.jpeg';
   }
 
   $ekstensi_gambar_valid = ['jpg', 'jpeg', 'png'];
@@ -95,6 +95,12 @@ function upload()
 function hapus($id)
 {
   $conn = koneksi();
+
+  $mhs = query("SELECT * FROM mahasiswa WHERE id = $id");
+  if ($mhs['gambar'] != 'default.jpeg') {
+    unlink('img/' . $mhs['gambar']);
+  }
+
   mysqli_query($conn, "DELETE FROM mahasiswa WHERE id = $id");
   return mysqli_affected_rows($conn);
 }
@@ -108,7 +114,16 @@ function ubah($data)
   $nrp = htmlspecialchars($data['nrp']);
   $email = htmlspecialchars($data['email']);
   $jurusan = htmlspecialchars($data['jurusan']);
-  $gambar = htmlspecialchars($data['gambar']);
+  $gambar_lama = htmlspecialchars($data['gambar_lama']);
+
+  $gambar = upload();
+  if (!$gambar) {
+    return false;
+  }
+
+  if ($gambar == 'default.jpeg') {
+    $gambar = $gambar_lama;
+  }
 
   $query = "UPDATE mahasiswa SET
             nama = '$nama',

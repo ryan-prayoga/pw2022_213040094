@@ -47,13 +47,16 @@ if (isset($_POST['tambah'])) {
       </li>
       <li>
         <label for="gambar">Gambar :</label>
-        <input type="file" name="gambar" id="gambar" required>
+        <input type="file" name="gambar" id="gambar" class="gambar" onchange="previewImage()">
+        <img src="img/default.jpeg" width="120" style="display: block;" class="img-preview">
       </li>
       <li>
         <button type="submit" name="tambah">Tambah Data!</button>
       </li>
     </ul>
   </form>
+
+  <script src="JS/script.js"></script>
 </body>
 
 </html>
